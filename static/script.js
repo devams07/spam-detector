@@ -20,7 +20,7 @@ async function checkSpam() {
     const data = await response.json();
 
     if (data.result === "Spam") {
-        resultDiv.innerHTML = "<span class='spam'>Spam Detected</span>";
+        resultDiv.innerHTML = "<span class='spam'>Spam Detected 🚨</span>";
     } else {
         resultDiv.innerHTML = "<span class='safe'>Safe Message</span>";
     }
