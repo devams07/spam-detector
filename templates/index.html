@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spam Detector</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: radial-gradient(circle at top, #0f172a, #020617);
+            color: white;
+            height: 100vh;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 60px;
+            font-size: 14px;
+            color: #94a3b8;
+        }
+
+        .navbar span {
+            color: #3b82f6;
+            font-weight: bold;
+        }
+
+        .hero {
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            font-weight: 600;
+        }
+
+        .hero h1 span {
+            color: #3b82f6;
+        }
+
+        .hero p {
+            color: #94a3b8;
+            margin-top: 10px;
+        }
+
+        .box {
+            margin: 40px auto;
+            width: 420px;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 0 30px rgba(59,130,246,0.2);
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            border: none;
+            border-radius: 10px;
+            padding: 12px;
+            background: #020617;
+            color: white;
+            outline: none;
+        }
+
+        button {
+            margin-top: 15px;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #3b82f6, #2563eb);
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        #result {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .spam {
+            color: #ef4444;
+        }
+
+        .safe {
+            color: #22c55e;
+        }
+
+        .loading {
+            color: #94a3b8;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <div><span>SpamAI</span></div>
+</div>
+
+<div class="hero">
+    <h1>Detect <span>Spam Messages</span> Instantly</h1>
+    <p>Smart AI-powered detection for SMS and emails</p>
+</div>
+
+<div class="box">
+    <textarea id="message" placeholder="Enter your message here..."></textarea>
+    <button onclick="checkSpam()">Analyze Message</button>
+    <div id="result"></div>
+</div>
+
+<script src="/static/script.js"></script>
+
+</body>
+</html>
