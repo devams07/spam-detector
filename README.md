@@ -22,6 +22,28 @@ It includes a **trained ML model + Flask API + interactive UI** for real-time pr
 
 ---
 
+## 🧠 Model Note (Important)
+
+⚠️ This model is **trained on a basic spam dataset**, which mainly contains common spam patterns like:
+
+* “Win money”
+* “Free offer”
+* “Click now”
+
+👉 Because of this, the model may **not detect advanced or human-like spam messages**, such as:
+
+* Social engineering attacks
+* Personalized phishing messages
+* Obfuscated text (e.g., `C0ngr@ts`)
+
+💡 **To improve accuracy:**
+
+* Train the model with your **own custom dataset**
+* Include **real-world phishing & modern spam examples**
+* Combine **ML + rule-based detection (links, keywords, urgency)**
+
+---
+
 ## 🏗️ Project Structure
 
 ```
@@ -119,6 +141,7 @@ Spam
 * 📊 Show prediction confidence (%)
 * 📱 Mobile responsive UI
 * ☁️ Cloud deployment (Render / AWS)
+* 🧠 Improve dataset with real-world phishing samples
 
 ---
 
@@ -138,5 +161,3 @@ If you like this project:
 * 🛠️ Contribute
 
 ---
-
-
