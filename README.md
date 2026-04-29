@@ -6,7 +6,7 @@
 
 ## 📌 Overview
 
-This project uses **Natural Language Processing (NLP)** and a **Long Short-Term Memory (LSTM)** neural network to classify SMS/email messages.
+This project uses **Natural Language Processing (NLP)** and a **Bidirectional Long Short-Term Memory (LSTM)** neural network to classify SMS/email messages.
 It includes a **trained ML model + Flask API + interactive UI** for real-time predictions.
 
 ---
