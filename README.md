@@ -1,6 +1,6 @@
 # 🛡️ Spam Detection System using LSTM
 
-🚀 A modern Basic AI-powered web application that detects whether a message is **Spam or Not Spam** using a deep learning model (LSTM).
+🚀 A modern AI-powered web application that detects whether a message is **Spam or Not Spam** using a deep learning model (LSTM).
 
 ---
 
