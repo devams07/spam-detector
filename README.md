@@ -1,154 +1,188 @@
-# 🛡️ Spam Detection System using LSTM
+# 🛡️ Spam Detection System using Bidirectional LSTM (Advanced)
 
-🚀 A modern AI-powered web application that detects whether a message is **Spam or Not Spam** using a deep learning model (LSTM).
+🚀 An AI-powered web application that detects whether a message is **Spam or Not Spam** using an advanced **Bidirectional LSTM (BiLSTM)** model trained on real-world and custom datasets.
 
 ---
 
 ## 📌 Overview
 
-This project uses **Natural Language Processing (NLP)** and a **Bidirectional Long Short-Term Memory (LSTM)** neural network to classify SMS/email messages.
-It includes a **trained ML model + Flask API + interactive UI** for real-time predictions.
+This project leverages **Natural Language Processing (NLP)** and a **Bidirectional LSTM (BiLSTM)** neural network to classify both SMS and email-like messages.
+
+Unlike basic spam detectors, this system can handle:
+
+* Subtle spam
+* Professional/phishing-style messages
+* Context-based classification
+
+It includes a **trained deep learning model + Flask API + interactive UI** for real-time predictions.
 
 ---
 
 ## ✨ Features
 
-* 🧠 Deep Learning model (LSTM)
-* 📊 Trained on real-world spam dataset
+* 🧠 Bidirectional LSTM (BiLSTM) for better context understanding
+* 📊 Trained on advanced + custom datasets
+* 🔍 Detects subtle and human-like spam
 * 🌐 REST API using Flask
-* 🎨 Clean & modern web UI
-* ⚡ Real-time spam prediction
-* 💾 Model persistence (`.h5` + tokenizer)
+* 🎨 Clean and responsive web interface
+* ⚡ Real-time predictions
+* 📈 Confidence score output
+* 💾 Model persistence (.h5 + tokenizer)
 
 ---
 
-## 🧠 Model Note (Important)
+## 🧠 Model Improvements
 
-⚠️ This model is **trained on a basic spam dataset**, which mainly contains common spam patterns like:
+### 🔻 Before
 
-* “Win money”
-* “Free offer”
-* “Click now”
+* Basic LSTM
+* Keyword-based dataset
+* Limited to obvious spam
 
-👉 Because of this, the model may **not detect advanced or human-like spam messages**, such as:
+### 🔺 Now
 
-* Social engineering attacks
-* Personalized phishing messages
-* Obfuscated text (e.g., `C0ngr@ts`)
+* Bidirectional LSTM (BiLSTM)
+* Advanced + custom dataset
+* Context-aware detection
+* Improved handling of:
 
-💡 **To improve accuracy:**
+  * Phishing messages
+  * Social engineering
+  * Indirect promotional spam
 
-* Train the model with your **own custom dataset**
-* Include **real-world phishing & modern spam examples**
-* Combine **ML + rule-based detection (links, keywords, urgency)**
+---
+
+## 🧠 Model Capability
+
+✔ Detects:
+
+* Keyword-based spam
+* Contextual spam
+* Subtle promotional messages
+* Phishing-like patterns
+
+⚠️ Still challenging:
+
+* Highly personalized scams
+* Completely unseen patterns
 
 ---
 
 ## 🏗️ Project Structure
 
-```
 spam-detector/
+
 │
+
 ├── data/
+
 │   ├── raw/
+
 │   └── processed/
-│       └── spam.csv
+
+│       ├── spam.csv
+
+│       └── advanced_spam.csv
+
 │
+
 ├── model/
-│   ├── lstm_model.h5
+
+│   ├── bilstm_model.h5
+
 │   └── tokenizer.pkl
+
 │
+
 ├── utils/
+
 │   ├── preprocess.py
+
 │   └── dataset.py
+
 │
+
 ├── templates/
+
 │   └── index.html
+
 │
+
 ├── static/
+
 │   └── script.js
+
 │
+
 ├── train.py
+
 ├── predict.py
+
 ├── app.py
+
 ├── requirements.txt
+
 └── .gitignore
-```
 
 ---
 
 ## ⚙️ Installation
 
-```bash
-git clone https://github.com/your-username/spam-detector.git
+git clone https://github.com/devams07/spam-detector.git
+
 cd spam-detector
+
 pip install -r requirements.txt
-```
 
 ---
 
 ## ▶️ How to Run
 
-### 1️⃣ Train the model
+1. Train the model
+   python train.py
 
-```bash
-python train.py
-```
+2. Run the application
+   python app.py
 
-### 2️⃣ Run the application
-
-```bash
-python app.py
-```
-
-### 3️⃣ Open in browser
-
-```
-http://127.0.0.1:5000/
-```
+3. Open in browser
+   http://127.0.0.1:5000/
 
 ---
 
-## 🧪 Example Usage
+## 🧪 Example
 
-### ✅ Input:
+Input:
+"Just checking if you're interested in this opportunity 😊"
 
-```
-"Congratulations! You won a free prize"
-```
-
-### 🚨 Output:
-
-```
-Spam
-```
+Output:
+Spam (Confidence: 0.82)
 
 ---
 
 ## 🧠 Technologies Used
 
-* 🐍 Python
-* 🔬 TensorFlow / Keras
-* 📊 Pandas, NumPy
-* 🌐 Flask
-* 🎨 HTML, CSS, JavaScript
+* Python
+* TensorFlow / Keras
+* Pandas, NumPy
+* Flask
+* HTML, CSS, JavaScript
 
 ---
 
 ## 📈 Future Improvements
 
-* 🔥 Upgrade to BERT (Transformer model)
-* 📊 Show prediction confidence (%)
-* 📱 Mobile responsive UI
-* ☁️ Cloud deployment (Render / AWS)
-* 🧠 Improve dataset with real-world phishing samples
+* Upgrade to Transformer models like BERT
+* Improve dataset with real-world phishing data
+* Deploy on cloud (AWS / Render)
+* Add hybrid detection (ML + rule-based)
 
 ---
 
 ## 👨‍💻 Author
 
-**Deva M S**
-💼 Aspiring Cybersecurity Engineer
+Deva M S
+
+Aspiring Cybersecurity Engineer
 
 ---
 
@@ -156,8 +190,6 @@ Spam
 
 If you like this project:
 
-* ⭐ Star this repo
-* 🍴 Fork it
-* 🛠️ Contribute
-
----
+* Star this repo
+* Fork it
+* Contribute
