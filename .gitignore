@@ -12,8 +12,6 @@ model/
 .h5
 .pkl
 
-# Dataset (optional, usually ignore large files)
-data/
 
 # OS files
 .DS_Store
