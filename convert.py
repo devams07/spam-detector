@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 
-input_path = "data/raw/SMSSpamCollection"
+input_path = "data/SMSSpamCollection"
 output_path = "data/processed/spam.csv"
 
 os.makedirs("data/processed", exist_ok=True)

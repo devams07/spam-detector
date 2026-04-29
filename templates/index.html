@@ -1,124 +1,514 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Spam Detector</title>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpamAI - Advanced Spam Detector</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
     <style>
-        body {
+        * {
             margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background: radial-gradient(circle at top, #0f172a, #020617);
-            color: white;
-            height: 100vh;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .navbar {
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(-45deg, #1e3c72, #2a5298, #7e22ce, #1e3c72);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            z-index: -2;
+            opacity: 0.15;
+        }
+
+        /* Navigation */
+        nav {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             padding: 20px 60px;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
             font-size: 14px;
+        }
+
+        .nav-links span {
             color: #94a3b8;
+            cursor: pointer;
+            transition: color 0.3s;
         }
 
-        .navbar span {
+        .nav-links span:hover {
             color: #3b82f6;
-            font-weight: bold;
         }
 
+        /* Hero Section */
         .hero {
             text-align: center;
-            margin-top: 80px;
+            padding: 60px 20px 40px;
         }
 
         .hero h1 {
-            font-size: 36px;
-            font-weight: 600;
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            animation: slideDown 0.8s ease-out;
         }
 
         .hero h1 span {
-            color: #3b82f6;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .hero p {
-            color: #94a3b8;
-            margin-top: 10px;
+            color: #cbd5e1;
+            font-size: 16px;
+            margin-bottom: 10px;
+            animation: slideUp 0.8s ease-out 0.1s backwards;
         }
 
-        .box {
-            margin: 40px auto;
-            width: 420px;
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
-            padding: 25px;
-            border-radius: 16px;
-            box-shadow: 0 0 30px rgba(59,130,246,0.2);
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Input Section */
+        .input-section {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            animation: slideUp 0.8s ease-out 0.2s backwards;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #cbd5e1;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         textarea {
             width: 100%;
-            height: 100px;
-            border: none;
-            border-radius: 10px;
-            padding: 12px;
-            background: #020617;
-            color: white;
+            height: 140px;
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            border-radius: 12px;
+            padding: 16px;
+            background: rgba(15, 23, 42, 0.6);
+            color: #e2e8f0;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 14px;
+            resize: none;
+            transition: all 0.3s;
             outline: none;
         }
 
-        button {
-            margin-top: 15px;
-            width: 100%;
-            padding: 12px;
+        textarea:focus {
+            border-color: #3b82f6;
+            background: rgba(15, 23, 42, 0.9);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+        }
+
+        textarea::placeholder {
+            color: #64748b;
+        }
+
+        /* Button */
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 14px 24px;
             border: none;
-            border-radius: 10px;
-            background: linear-gradient(90deg, #3b82f6, #2563eb);
-            color: white;
+            border-radius: 12px;
             font-size: 15px;
+            font-weight: 600;
             cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        button:hover {
-            opacity: 0.9;
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            box-shadow: 0 5px 20px rgba(59, 130, 246, 0.3);
         }
 
-        #result {
-            margin-top: 15px;
-            text-align: center;
-            font-size: 18px;
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.5);
         }
 
-        .spam {
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #3b82f6;
+            border: 2px solid #3b82f6;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        /* Result Section */
+        .result-section {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            display: none;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        .result-section.active {
+            display: block;
+        }
+
+        .result-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .result-icon {
+            font-size: 40px;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .result-icon.spam {
+            background: rgba(239, 68, 68, 0.1);
             color: #ef4444;
         }
 
-        .safe {
+        .result-icon.safe {
+            background: rgba(34, 197, 94, 0.1);
             color: #22c55e;
         }
 
-        .loading {
-            color: #94a3b8;
+        .result-text h2 {
+            font-size: 28px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .result-text p {
+            color: #cbd5e1;
+            font-size: 14px;
+        }
+
+        /* Confidence Bar */
+        .confidence-bar {
+            margin: 30px 0;
+        }
+
+        .confidence-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+
+        .confidence-value {
+            font-weight: 600;
+            color: #3b82f6;
+        }
+
+        .bar-container {
+            width: 100%;
+            height: 12px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            border-radius: 10px;
+            transition: width 1s ease-out;
+            width: 0%;
+        }
+
+        .bar-fill.spam {
+            background: linear-gradient(90deg, #ef4444, #dc2626);
+        }
+
+        .bar-fill.safe {
+            background: linear-gradient(90deg, #22c55e, #16a34a);
+        }
+
+        /* Features Grid */
+        .features-section {
+            margin-top: 30px;
+        }
+
+        .features-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #cbd5e1;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+        }
+
+        .feature-badge {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-size: 12px;
+            color: #cbd5e1;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .feature-badge:hover {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+
+        .feature-badge.active {
+            background: rgba(59, 130, 246, 0.3);
+            border-color: #3b82f6;
+            color: #3b82f6;
+        }
+
+        /* Loading Animation */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(59, 130, 246, 0.2);
+            border-radius: 50%;
+            border-top-color: #3b82f6;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Error Message */
+        .error-message {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #fca5a5;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #64748b;
+            font-size: 13px;
+            margin-top: 60px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .input-section,
+            .result-section {
+                padding: 20px;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     </style>
 </head>
 
 <body>
+    <div class="animated-bg"></div>
 
-<div class="navbar">
-    <div><span>SpamAI</span></div>
-</div>
+    <nav>
+        <div class="logo">
+            <i class="fas fa-shield-alt"></i> SpamAI
+        </div>
+        <div class="nav-links">
+            <span>About</span>
+            <span>Features</span>
+            <span>Contact</span>
+        </div>
+    </nav>
 
-<div class="hero">
-    <h1>Detect <span>Spam Messages</span> Instantly</h1>
-    <p>Smart AI-powered detection for SMS and emails</p>
-</div>
+    <div class="hero">
+        <h1>Detect <span>Spam Messages</span> Instantly</h1>
+        <p>🤖 AI-powered detection with advanced pattern recognition</p>
+    </div>
 
-<div class="box">
-    <textarea id="message" placeholder="Enter your message here..."></textarea>
-    <button onclick="checkSpam()">Analyze Message</button>
-    <div id="result"></div>
-</div>
+    <div class="container">
+        <!-- Input Section -->
+        <div class="input-section">
+            <label class="input-label">📝 Paste Your Message</label>
+            <textarea id="message" placeholder="Paste an SMS, email, or any message to check..."></textarea>
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="checkSpam()">
+                    <i class="fas fa-check-circle"></i> Analyze
+                </button>
+                <button class="btn btn-secondary" onclick="clearInput()">
+                    <i class="fas fa-times"></i> Clear
+                </button>
+            </div>
+            <div class="error-message" id="errorMsg"></div>
+        </div>
 
-<script src="/static/script.js"></script>
+        <!-- Result Section -->
+        <div class="result-section" id="resultSection">
+            <div class="result-header">
+                <div class="result-icon" id="resultIcon">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </div>
+                <div class="result-text">
+                    <h2 id="resultTitle">Analyzing...</h2>
+                    <p id="resultDescription">Processing your message</p>
+                </div>
+            </div>
 
+            <!-- Confidence Visualization -->
+            <div class="confidence-bar">
+                <div class="confidence-label">
+                    <span>Detection Confidence</span>
+                    <span class="confidence-value" id="confidenceValue">0%</span>
+                </div>
+                <div class="bar-container">
+                    <div class="bar-fill" id="confidenceFill"></div>
+                </div>
+            </div>
+
+            <!-- Features -->
+            <div class="features-section">
+                <div class="features-title">🔍 Detected Patterns</div>
+                <div class="features-grid" id="featuresGrid">
+                    <div class="feature-badge">No patterns detected</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>SpamAI &copy; 2026 | Advanced Spam Detection System</p>
+    </footer>
+
+    <script src="/static/script.js"></script>
 </body>
 </html>
